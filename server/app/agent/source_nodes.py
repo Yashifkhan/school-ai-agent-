@@ -2,6 +2,11 @@
 from app.agent.state import AgentState
 from app.tools.llm_knowledge import answer_general_question
 from app.tools.web_search import search_web
+import asyncio
+import logging
+
+from app.agent.state import AgentState
+from app.tools.vector_search import search_school_documents
 
 
 def llm_knowledge_node(state: AgentState):
@@ -23,16 +28,67 @@ def llm_knowledge_node(state: AgentState):
         ]
     }
 
-def vector_db_node(state: AgentState):
+async def vector_db_node(state: AgentState):
 
-    return {
-        "source_results": [
-            {
-                "source": "vector_db",
-                "status": "route_reached"
+    query = state["query"]
+
+    try:
+
+        # Run synchronous Pinecone search without
+        # blocking the asynchronous LangGraph node.
+        results = await asyncio.to_thread(
+            search_school_documents,
+            query,
+            4
+        )
+
+        if not results:
+
+            return {
+                "source_results": [
+                    {
+                        "source": "vector_db",
+                        "status": "no_results",
+                        "query": query,
+                        "message": "No relevant documents found."
+                    }
+                ]
             }
-        ]
-    }
+
+        # Store each retrieved document chunk
+        # in the existing AgentState structure.
+        formatted_results = []
+
+        for result in results:
+
+            formatted_results.append({
+                "source": "vector_db",
+                "status": "success",
+                "query": query,
+                "chunk_id": result["id"],
+                "content": result["content"],
+                "source_document": result["source_document"],
+                "page": result["page"],
+                "score": result["score"]
+            })
+
+        return {
+            "source_results": formatted_results
+        }
+
+    except Exception:
+
+        logging.exception("Vector database search failed.")
+
+        return {
+            "source_results": [
+                {
+                    "source": "vector_db",
+                    "status": "error",
+                    "message": "Vector search failed. Check server logs."
+                }
+            ]
+        }
 
 
 
