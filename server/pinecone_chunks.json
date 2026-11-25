@@ -1,0 +1,164 @@
+[
+    {
+        "id": "9c862287-73f9-457c-a583-7c86cc437090",
+        "score": -0.0018701683729887009,
+        "metadata": {
+            "author": "Operations Guide",
+            "creationdate": "2026-10-16T16:21:27+00:00",
+            "creator": "Writer",
+            "keywords": "students, admissions, fees, transport, routes, school, management",
+            "page": 0.0,
+            "page_label": "1",
+            "producer": "LibreOffice 25.2.3.2 (X86_64) / LibreOffice Community",
+            "source": "C:\\gen ai projects\\AI Agent project\\server\\student_management_transport_guide.pdf",
+            "subject": "Student admissions, fee collection, transport setup and route management",
+            "text": "1. Open the sidebar and hover over Students.\n2. Click Student List. The Student Management main page opens.\n3. Click the Student Admission button.\n4. Enter the required personal information in the admission form.\n5. Click Submit to complete the admission.\nB. Open the student 360 profile\n1. On the Student List page, find the required student.\n2. Click the student's 360 button to open the complete profile.\n3. Review the profile category by category. Categories can include Transport, Fees, Attendance, Scores and other \navailable student information.\nUse the 360 profile  Open this profile when you need to inspect one student's full information or manage their \ntransport details.",
+            "title": "Student Management and Transport - Step-by-Step Guide",
+            "total_pages": 4.0
+        }
+    },
+    {
+        "id": "4f8c1644-12e4-4d08-917d-9a2386a3792e",
+        "score": -0.004445228725671768,
+        "metadata": {
+            "author": "Operations Guide",
+            "creationdate": "2026-10-16T16:21:27+00:00",
+            "creator": "Writer",
+            "keywords": "students, admissions, fees, transport, routes, school, management",
+            "page": 1.0,
+            "page_label": "2",
+            "producer": "LibreOffice 25.2.3.2 (X86_64) / LibreOffice Community",
+            "source": "C:\\gen ai projects\\AI Agent project\\server\\student_management_transport_guide.pdf",
+            "subject": "Student admissions, fee collection, transport setup and route management",
+            "text": "STUDENT OPERATIONS  /  QUICK GUIDE\nStudent Management & Transport  •  Page 2\n2. Collect a student fee\nMenu path: Sidebar > Fees > Fee Management\n1. Open the sidebar and hover over Fees.\n2. Click Fee Management. The fee management page opens with the student list.\n3. Find the student and click Collect.\n4. In the fee collection modal, select the month for which you are collecting the fee.\n5. Select the applicable fee type.\n6. Enter the amount to collect and review the selected month, fee type and amount.\n7. Click Submit to complete the fee collection.\nBefore submitting  Check that the student, month, fee type and amount are correct.\n3. Enable transport during new student admission\nUse this flow when the student is being registered for the first time and needs school transport.",
+            "title": "Student Management and Transport - Step-by-Step Guide",
+            "total_pages": 4.0
+        }
+    },
+    {
+        "id": "11ebd75e-12de-4352-a290-80619cccae86",
+        "score": -0.00455766636878252,
+        "metadata": {
+            "author": "Operations Guide",
+            "creationdate": "2026-10-16T16:21:27+00:00",
+            "creator": "Writer",
+            "keywords": "students, admissions, fees, transport, routes, school, management",
+            "page": 1.0,
+            "page_label": "2",
+            "producer": "LibreOffice 25.2.3.2 (X86_64) / LibreOffice Community",
+            "source": "C:\\gen ai projects\\AI Agent project\\server\\student_management_transport_guide.pdf",
+            "subject": "Student admissions, fee collection, transport setup and route management",
+            "text": "Use this flow when the student is being registered for the first time and needs school transport.\n1. Open Student Admission and complete the required student information.\n2. Find the Enable Transport option and check the box.\n3. Select the student's transport area.\n4. Select the required month.\n5. Submit the admission form.\nExpected result  The student is registered with transport enabled and can be considered for route assignment \nwhen creating a route.",
+            "title": "Student Management and Transport - Step-by-Step Guide",
+            "total_pages": 4.0
+        }
+    },
+    {
+        "id": "fbd366d1-74dd-471f-b4e0-79eadb7f3fc9",
+        "score": -0.011858870275318623,
+        "metadata": {
+            "author": "Operations Guide",
+            "creationdate": "2026-10-16T16:21:27+00:00",
+            "creator": "Writer",
+            "keywords": "students, admissions, fees, transport, routes, school, management",
+            "page": 0.0,
+            "page_label": "1",
+            "producer": "LibreOffice 25.2.3.2 (X86_64) / LibreOffice Community",
+            "source": "C:\\gen ai projects\\AI Agent project\\server\\student_management_transport_guide.pdf",
+            "subject": "Student admissions, fee collection, transport setup and route management",
+            "text": "STUDENT OPERATIONS  /  QUICK GUIDE\nStudent Management & Transport  •  Page 1\nSTEP-BY-STEP OPERATIONS GUIDE\nStudent Management\n& Transport\nAdmissions, student profiles, fee collection, transport setup and route management\nPurpose. Use this guide to complete the common student and transport tasks in the school management system. \nFollow the menu paths and steps in order.\nQuick navigation\nTask Where to start\nAdmission and 360 profile Sidebar > Students > Student List\nFee collection Sidebar > Fees > Fee Management\nTransport setup Student Admission or Student 360 > Transport\nRoute management Sidebar > Transport > Routes\n1. Admit a student and view the 360 profile\nA. Add a new student\n1. Open the sidebar and hover over Students.\n2. Click Student List. The Student Management main page opens.",
+            "title": "Student Management and Transport - Step-by-Step Guide",
+            "total_pages": 4.0
+        }
+    },
+    {
+        "id": "b5198ad1-419d-497e-b0aa-06bb6a2d540b",
+        "score": -0.0169190876185894,
+        "metadata": {
+            "author": "Operations Guide",
+            "creationdate": "2026-10-16T16:21:27+00:00",
+            "creator": "Writer",
+            "keywords": "students, admissions, fees, transport, routes, school, management",
+            "page": 2.0,
+            "page_label": "3",
+            "producer": "LibreOffice 25.2.3.2 (X86_64) / LibreOffice Community",
+            "source": "C:\\gen ai projects\\AI Agent project\\server\\student_management_transport_guide.pdf",
+            "subject": "Student admissions, fee collection, transport setup and route management",
+            "text": "STUDENT OPERATIONS  /  QUICK GUIDE\nStudent Management & Transport  •  Page 3\n4. Add transport for an already-registered student\nUse this flow when the student already exists in the system.\n1. Open the sidebar, hover over Students and click Student List.\n2. Find the student and click the 360 button.\n3. In the profile header, click Transport.\n4. Click Edit.\n5. Select the required route and month using the available fields.\n6. Save the changes. The student is added to transport.\n5. Remove a student from transport\n1. Open the student's 360 profile from Student List.\n2. Click Transport in the profile header.\n3. Click Edit to update the transport settings.\n4. Disable transport for the student.\n5. Save the change if the screen presents a save action, then verify the transport status.",
+            "title": "Student Management and Transport - Step-by-Step Guide",
+            "total_pages": 4.0
+        }
+    },
+    {
+        "id": "acf6d3e5-0197-47ba-be05-36f5f0822025",
+        "score": -0.019002409651875496,
+        "metadata": {
+            "author": "Operations Guide",
+            "creationdate": "2026-10-16T16:21:27+00:00",
+            "creator": "Writer",
+            "keywords": "students, admissions, fees, transport, routes, school, management",
+            "page": 3.0,
+            "page_label": "4",
+            "producer": "LibreOffice 25.2.3.2 (X86_64) / LibreOffice Community",
+            "source": "C:\\gen ai projects\\AI Agent project\\server\\student_management_transport_guide.pdf",
+            "subject": "Student admissions, fee collection, transport setup and route management",
+            "text": "been enabled and saved before trying again.\n7. Remove a student from an existing route\n1. Open the sidebar and go to Transport > Routes.\n2. On the route dashboard, find the route that needs to be updated.\n3. Click the Edit button on that route card.\n4. Find the student in the route's student list.\n5. Click the Delete button next to that student.\n6. Click Save to apply the route changes.\nFinal verification checklist\n  ☐ The student admission form was submitted successfully.\n  ☐ The correct student 360 profile was opened before editing student details.\n  ☐ Fee month, fee type and amount were checked before submission.\n  ☐ Transport is enabled and saved before trying to assign a student to a route.\n  ☐ The correct route, driver, helper and student list were saved.",
+            "title": "Student Management and Transport - Step-by-Step Guide",
+            "total_pages": 4.0
+        }
+    },
+    {
+        "id": "a370d981-13fc-48e5-ad71-0208afcea38c",
+        "score": -0.022074727341532707,
+        "metadata": {
+            "author": "Operations Guide",
+            "creationdate": "2026-10-16T16:21:27+00:00",
+            "creator": "Writer",
+            "keywords": "students, admissions, fees, transport, routes, school, management",
+            "page": 3.0,
+            "page_label": "4",
+            "producer": "LibreOffice 25.2.3.2 (X86_64) / LibreOffice Community",
+            "source": "C:\\gen ai projects\\AI Agent project\\server\\student_management_transport_guide.pdf",
+            "subject": "Student admissions, fee collection, transport setup and route management",
+            "text": "☐ The correct route, driver, helper and student list were saved.\n  ☐ After removing a student from a route, the route changes were saved.\nWorkflow distinction: Use Disable Transport when the student should no longer use transport. Use Delete in the route edit \nscreen when the student should be removed from that route.",
+            "title": "Student Management and Transport - Step-by-Step Guide",
+            "total_pages": 4.0
+        }
+    },
+    {
+        "id": "4f326543-5ff2-4371-8289-b7b91b3ec34f",
+        "score": -0.02959529124200344,
+        "metadata": {
+            "author": "Operations Guide",
+            "creationdate": "2026-10-16T16:21:27+00:00",
+            "creator": "Writer",
+            "keywords": "students, admissions, fees, transport, routes, school, management",
+            "page": 3.0,
+            "page_label": "4",
+            "producer": "LibreOffice 25.2.3.2 (X86_64) / LibreOffice Community",
+            "source": "C:\\gen ai projects\\AI Agent project\\server\\student_management_transport_guide.pdf",
+            "subject": "Student admissions, fee collection, transport setup and route management",
+            "text": "STUDENT OPERATIONS  /  QUICK GUIDE\nStudent Management & Transport  •  Page 4\n6. Create a route and assign students\nMenu path: Sidebar > Transport > Routes\n1. Open the sidebar and hover over Transport.\n2. Click Routes. The route dashboard opens.\n3. Click Quick Route.\n4. Enter the route name.\n5. Select the route time.\n6. Select the driver and helper.\n7. Select the students to include. Only students already added to transport should be available for route \nassignment.\n8. Review the route name, time, driver, helper and student list, then click Save.\nIf a student is not listed  Return to Student List, open the student's 360 profile and confirm that transport has \nbeen enabled and saved before trying again.\n7. Remove a student from an existing route",
+            "title": "Student Management and Transport - Step-by-Step Guide",
+            "total_pages": 4.0
+        }
+    },
+    {
+        "id": "ade4c8f2-b013-4865-9c10-7cb70a9779e1",
+        "score": -0.04152301326394081,
+        "metadata": {
+            "author": "Operations Guide",
+            "creationdate": "2026-10-16T16:21:27+00:00",
+            "creator": "Writer",
+            "keywords": "students, admissions, fees, transport, routes, school, management",
+            "page": 2.0,
+            "page_label": "3",
+            "producer": "LibreOffice 25.2.3.2 (X86_64) / LibreOffice Community",
+            "source": "C:\\gen ai projects\\AI Agent project\\server\\student_management_transport_guide.pdf",
+            "subject": "Student admissions, fee collection, transport setup and route management",
+            "text": "5. Save the change if the screen presents a save action, then verify the transport status.\nImportant dependency  A student must already be added to transport to appear in the student list when creating \nor assigning a route. If a student is missing from the route setup list, first check that transport has been enabled \nand saved.\nNote: Disabling transport removes the student from transport participation. Removing a student from one route only is a \nseparate action described in Section 7.",
+            "title": "Student Management and Transport - Step-by-Step Guide",
+            "total_pages": 4.0
+        }
+    }
+]
