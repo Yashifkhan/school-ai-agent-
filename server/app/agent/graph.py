@@ -6,6 +6,7 @@ from app.agent.state import AgentState
 from app.agent.nodes import classify_query_node
 
 from app.agent.routing import route_after_classification
+from app.agent.response_node import response_node
 
 
 from app.agent.source_nodes import (
@@ -32,6 +33,7 @@ builder.add_node("vector_db", vector_db_node)
 builder.add_node("web_search", web_search_node)
 builder.add_node("school_db", school_db_node)
 builder.add_node("clarification", clarification_node)
+builder.add_node("response", response_node)
 
 
 # Starting point
@@ -52,11 +54,16 @@ builder.add_conditional_edges(
 )
 
 
-# Connect source nodes to END
-builder.add_edge("llm_knowledge", END)
-builder.add_edge("vector_db", END)
-builder.add_edge("web_search", END)
-builder.add_edge("school_db", END)
+# Connect source nodes to response node
+builder.add_edge("llm_knowledge", "response")
+builder.add_edge("vector_db", "response")
+builder.add_edge("web_search", "response")
+builder.add_edge("school_db", "response")
+
+# Response node connects to END
+builder.add_edge("response", END)
+
+# Clarification connects directly to END
 builder.add_edge("clarification", END)
 
 
