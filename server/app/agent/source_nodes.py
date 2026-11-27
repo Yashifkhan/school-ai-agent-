@@ -4,6 +4,7 @@ from app.tools.llm_knowledge import answer_general_question
 from app.tools.web_search import search_web
 import asyncio
 import logging
+import time
 
 from app.agent.state import AgentState
 from app.tools.vector_search import search_school_documents
@@ -21,6 +22,7 @@ from app.tools.school_db import (
 
 from app.tools.school_data import get_collection
 
+logger = logging.getLogger(__name__)
 
 def llm_knowledge_node(state: AgentState):
 
@@ -28,7 +30,11 @@ def llm_knowledge_node(state: AgentState):
     query = state["query"]
 
     # 2. Generate general knowledge answer
-    answer = answer_general_question(query)
+    answer = answer_general_question(
+        query,
+        state.get("provider", "gemini"),
+        state.get("model"),
+    )
 
     # 3. Return result to LangGraph state
     return {
@@ -49,11 +55,18 @@ async def vector_db_node(state: AgentState):
 
         # Run synchronous Pinecone search without
         # blocking the asynchronous LangGraph node.
-        results = await asyncio.to_thread(
-            search_school_documents,
-            query,
-            4
-        )
+        started_at = time.perf_counter()
+        try:
+            results = await asyncio.to_thread(
+                search_school_documents,
+                query,
+                4
+            )
+        finally:
+            logger.info(
+                "Vector database retrieval took %.2fs",
+                time.perf_counter() - started_at,
+            )
 
         if not results:
 
@@ -77,12 +90,9 @@ async def vector_db_node(state: AgentState):
             formatted_results.append({
                 "source": "vector_db",
                 "status": "success",
-                "query": query,
-                "chunk_id": result["id"],
                 "content": result["content"],
                 "source_document": result["source_document"],
                 "page": result["page"],
-                "score": result["score"]
             })
 
         return {
@@ -111,12 +121,19 @@ async def web_search_node(state: AgentState):
     query = state["query"]
 
     # 2. Call actual Tavily search function
-    response = await search_web(
-        query=query,
-        max_results=5,
-        search_depth="fast",
-        topic="general",
-    )
+    started_at = time.perf_counter()
+    try:
+        response = await search_web(
+            query=query,
+            max_results=5,
+            search_depth="fast",
+            topic="general",
+        )
+    finally:
+        logger.info(
+            "Web search took %.2fs",
+            time.perf_counter() - started_at,
+        )
 
     # 3. Return structured results to AgentState
     return {
@@ -346,8 +363,12 @@ def clarification_node(state: AgentState):
 
     question = (
         classification.clarification_question
-        if classification
+        if classification and classification.needs_clarification
         else None
+    )
+    question = question or (
+        "I couldn't determine which information source is needed. "
+        "Could you rephrase your question or add a little more context?"
     )
 
     return {
@@ -355,7 +376,8 @@ def clarification_node(state: AgentState):
             {
                 "source": "clarification",
                 "status": "required",
-                "question": question or "Please provide more information."
+                "question": question
             }
-        ]
+        ],
+        "final_answer": question
     }

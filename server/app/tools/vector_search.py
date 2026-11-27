@@ -1,45 +1,31 @@
 
 import os
+from functools import lru_cache
+
 from dotenv import load_dotenv
 from pinecone import Pinecone
 
-# ==========================================
-# 1. LOAD ENVIRONMENT VARIABLES
-# ==========================================
-
 load_dotenv()
 
-PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
-PINECONE_INDEX_NAME = os.getenv("PINECONE_INDEX_NAME")
-
-# Default namespace
 PINECONE_NAMESPACE = os.getenv(
     "PINECONE_NAMESPACE",
     "school-manual"
 )
 
-# ==========================================
-# 2. VALIDATE ENVIRONMENT VARIABLES
-# ==========================================
 
-if not PINECONE_API_KEY:
-    raise ValueError("PINECONE_API_KEY is missing from .env")
+@lru_cache(maxsize=1)
+def _get_index():
+    api_key = os.getenv("PINECONE_API_KEY")
+    index_name = os.getenv("PINECONE_INDEX_NAME")
 
-if not PINECONE_INDEX_NAME:
-    raise ValueError("PINECONE_INDEX_NAME is missing from .env")
+    if not api_key:
+        raise ValueError("PINECONE_API_KEY is missing from .env")
 
-# ==========================================
-# 3. INITIALIZE PINECONE
-# ==========================================
+    if not index_name:
+        raise ValueError("PINECONE_INDEX_NAME is missing from .env")
 
-pc = Pinecone(api_key=PINECONE_API_KEY)
+    return Pinecone(api_key=api_key).Index(index_name)
 
-index = pc.Index(PINECONE_INDEX_NAME)
-
-
-# ==========================================
-# 4. SEARCH SCHOOL DOCUMENTS
-# ==========================================
 
 def search_school_documents(
     query: str,
@@ -52,7 +38,7 @@ def search_school_documents(
     if top_k < 1:
         raise ValueError("top_k must be at least 1.")
 
-    response = index.search(
+    response = _get_index().search(
         namespace=PINECONE_NAMESPACE,
         query={
             "top_k": top_k,

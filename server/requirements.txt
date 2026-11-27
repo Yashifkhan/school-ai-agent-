@@ -1,0 +1,8 @@
+fastapi>=0.110,<1.0
+uvicorn[standard]>=0.29,<1.0
+python-dotenv>=1.0,<2.0
+langgraph>=0.2
+langchain-google-genai>=2.0
+langchain-groq>=0.3.8,<1.0
+pinecone>=5.0
+tavily-python>=0.5

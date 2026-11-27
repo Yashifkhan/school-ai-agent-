@@ -1,30 +1,10 @@
-import os
+import logging
+import time
 
-from dotenv import load_dotenv
-from langchain_google_genai import ChatGoogleGenerativeAI
+from app.services.ai_models import get_chat_model
 
-load_dotenv()
+logger = logging.getLogger(__name__)
 
-
-# 1. Validate configuration
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-GEMINI_MODEL = os.getenv("GEMINI_MODEL")
-
-if not GEMINI_API_KEY:
-    raise ValueError("GEMINI_API_KEY is missing from .env")
-
-if not GEMINI_MODEL:
-    raise ValueError("GEMINI_MODEL is missing from .env")
-
-
-# 2. Initialize Gemini
-llm = ChatGoogleGenerativeAI(
-    model=GEMINI_MODEL,
-    google_api_key=GEMINI_API_KEY,
-)
-
-
-# 3. System instructions
 SYSTEM_PROMPT = """
 You are the general knowledge assistant for a School SaaS platform.
 
@@ -48,8 +28,12 @@ Answer the user's question directly.
 """
 
 
-# 4. Reusable LLM Knowledge function
-def answer_general_question(query: str) -> str:
+# Reusable general knowledge function
+def answer_general_question(
+    query: str,
+    provider: str = "gemini",
+    model: str | None = None,
+) -> str:
 
     if not query or not query.strip():
         raise ValueError("User query cannot be empty.")
@@ -59,8 +43,15 @@ def answer_general_question(query: str) -> str:
         ("human", query)
     ]
 
-    # Generate answer
-    response = llm.invoke(messages)
+    llm = get_chat_model(provider, model)
+    started_at = time.perf_counter()
+    try:
+        response = llm.invoke(messages)
+    finally:
+        logger.info(
+            "General-knowledge generation call took %.2fs",
+            time.perf_counter() - started_at,
+        )
 
     # Extract generated text
     content = response.content
@@ -79,6 +70,6 @@ def answer_general_question(query: str) -> str:
         answer = ""
 
     if not answer:
-        raise RuntimeError("Gemini returned an empty response.")
+        raise RuntimeError("The selected model returned an empty answer.")
 
     return answer

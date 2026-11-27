@@ -1,30 +1,14 @@
 
 
 
-# Imports
-from dotenv import load_dotenv
-from langchain_google_genai import ChatGoogleGenerativeAI
+import logging
+import time
 
 from app.schemas.routing import QueryClassification
 from app.agent.state import AgentState
+from app.services.ai_models import get_chat_model
 
-import os
-
-load_dotenv()
-
-
-# 1. Initialize Gemini
-llm = ChatGoogleGenerativeAI(
-    model=os.getenv("GEMINI_MODEL"),
-    google_api_key=os.getenv("GEMINI_API_KEY"),
-)
-
-
-# 2. Structured output
-structured_llm = llm.with_structured_output(
-    QueryClassification,
-    method="json_schema",
-)
+logger = logging.getLogger(__name__)
 
 
 # 3. Classifier prompt
@@ -38,32 +22,59 @@ Available sources:
 3. web_search: Latest external information.
 4. school_db: Real-time school records.
 
-Select one or multiple sources when necessary.
-Ask for clarification when required information is missing.
-Do not answer the user's question.
-Return structured classification only.
+Select one or multiple sources when necessary. Always select at least one
+source unless clarification is genuinely required. Route greetings, thanks,
+and general conversational messages to llm_knowledge. Ask for clarification
+when required information is missing. Do not answer the user's question.
+
+Return one JSON object with these fields: intent (string), sources (array of
+"llm_knowledge", "vector_db", "web_search", or "school_db"),
+needs_clarification (boolean), clarification_question (string or null), and
+reason (string). Return structured classification only.
 """
 
 
-# 4. Original Gemini classifier
-def classify_query(query: str) -> QueryClassification:
+# 1. Classifier
+def classify_query(
+    query: str,
+    provider: str = "gemini",
+    model: str | None = None,
+) -> QueryClassification:
 
     messages = [
         ("system", CLASSIFIER_PROMPT),
         ("human", f"Classify this user query:\n{query}")
     ]
 
-    result = structured_llm.invoke(messages)
+    llm = get_chat_model(provider, model)
+    method = "json_schema" if provider == "gemini" else "json_mode"
+    structured_llm = llm.with_structured_output(
+        QueryClassification,
+        method=method,
+    )
+
+    started_at = time.perf_counter()
+    try:
+        result = structured_llm.invoke(messages)
+    finally:
+        logger.info(
+            "Query classification call took %.2fs",
+            time.perf_counter() - started_at,
+        )
 
     return result
 
 
-# 5. LangGraph classifier node
+# 2. LangGraph classifier node
 def classify_query_node(state: AgentState):
 
     query = state["query"]
 
-    classification = classify_query(query)
+    classification = classify_query(
+        query,
+        state.get("provider", "gemini"),
+        state.get("model"),
+    )
 
     return {
         "classification": classification

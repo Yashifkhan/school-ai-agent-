@@ -1,5 +1,9 @@
 
+import logging
+
 from app.agent.state import AgentState
+
+logger = logging.getLogger(__name__)
 
 
 AVAILABLE_SOURCES = {
@@ -31,9 +35,11 @@ def route_after_classification(
 
     # 4. Validate selected sources
     if not sources:
-        raise ValueError(
-            "Classifier returned no sources."
+        logger.warning(
+            "Classifier returned no sources without requesting clarification; "
+            "routing to clarification."
         )
+        return ["clarification"]
 
     invalid_sources = set(sources) - AVAILABLE_SOURCES
 
@@ -44,6 +50,3 @@ def route_after_classification(
 
     # 5. Return selected nodes
     return sources
-
-
-print("Dummy text")

@@ -32,7 +32,7 @@ class AgentState(TypedDict):
 
     query: str
 
-    classification: QueryClassification | None
+    classification: NotRequired[QueryClassification | None]
 
     source_results: Annotated[
         list[dict[str, Any]],
@@ -44,4 +44,6 @@ class AgentState(TypedDict):
 
     # Optional branch restriction
     branch_id: NotRequired[str | None]
+    provider: NotRequired[str]
+    model: NotRequired[str]
     final_answer: NotRequired[str]
